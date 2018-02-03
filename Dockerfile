@@ -1,12 +1,12 @@
-FROM codeworksio/ubuntu:16.04-20180130
+FROM codeworksio/ubuntu:18.04-20180203
 
 # SEE: https://github.com/docker-library/openjdk/blob/master/8-jdk/Dockerfile
 
 ARG APT_PROXY
 ARG APT_PROXY_SSL
 ENV JAVA_VERSION="8u151" \
-    JAVA_UBUNTU_VERSION="8u151-b12-0ubuntu0.16.04.2" \
-    CA_CERTIFICATES_JAVA_VERSION="20160321ubuntu1" \
+    JAVA_UBUNTU_VERSION="8u151-b12-1" \
+    CA_CERTIFICATES_JAVA_VERSION="20170930" \
     JAVA_HOME="/java-home"
 
 RUN set -ex \
