@@ -41,10 +41,8 @@ log:
 	docker logs --follow $(NAME)
 
 test:
-	docker exec --interactive --tty \
-		--user ubuntu \
-		$(NAME) \
-		java -version
+	docker run --interactive --tty codeworksio/openjdk8 \
+		java -version | grep 'openjdk version.\+1.8.0'
 
 bash:
 	docker exec --interactive --tty \
@@ -59,6 +57,7 @@ clean:
 push:
 	docker push $(IMAGE):$(shell cat VERSION)
 	docker push $(IMAGE):latest
+	sleep 10
 	curl --request POST "https://hooks.microbadger.com/images/$(IMAGE)/jbGEfB_83XyFi6gxmhb2PrVqs_A="
 
 .SILENT:

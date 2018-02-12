@@ -1,14 +1,9 @@
 machine:
   services:
     - docker
-dependencies:
-  cache_directories:
-    - "~/docker"
-  override:
-    - docker info
-    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
-    - docker build --tag codeworksio/openjdk8 .
-    - mkdir -p ~/docker; docker save codeworksio/openjdk8 > ~/docker/image.tar
 test:
   override:
-    - docker run --interactive --tty codeworksio/openjdk8 java -version | grep 'openjdk version.\+1.8.0'
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - make build
+    - make test
+    - make push
